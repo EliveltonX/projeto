@@ -13,22 +13,32 @@
       <h2 class="recipe-title">{{recipe.title}}</h2>
     </a>
   </div>
-  
   <div class="recipe-autor">
+    {% if recipe.author is not None %}
     <span class="recipe-autor-item">
       <i class="fas fa-user"></i>
       {{recipe.author.first_name}} {{recipe.author.last_name}}
     </span>
+    {% else %}
+    <span class="recipe-autor-item">
+      <i class="fas fa-user"></i>
+      *Anonimo*
+    </span>
+    {% endif %}
     <span class="recipe-autor-item">
       <i class="fas fa-calendar-alt"></i>
       {{recipe.created_at|date:"d/m/Y"}}
     </span>
-    <span class="recipe-autor-item">
-      <a href="/recipes/category/cafe-da-manha/">
-        <i class="fas fa-layer-group"></i>
-        {{recipe.category.name}}
-      </a>
-    </span>
+
+    {% if recipe.category is not None %}
+      <span class="recipe-autor-item">
+        <a href="{%url 'myRecipes:category' recipe.category.id %}">
+          <i class="fas fa-layer-group"></i>
+          {{recipe.category.name}}
+        </a>
+      </span>
+    {% endif %}
+
   </div>
   <div class="recipe-content">
     <p>
