@@ -1,11 +1,16 @@
 <div class="recipe recipe-list-item">
   <a href="{% url 'myRecipes:recipe' recipe.id %}">
+
+    {% if recipe.cover.url is not Null  %}
     <div class="recipe-cover">
-        <img
-        src="{{recipe.cover.url}}"
-        alt="temporario"
-        />
-      </div>
+      <img
+      src="{{recipe.cover.url}}"
+      alt="temporario"
+      />
+    </div>
+    {% else %}
+      <p>SEM IMG</p>
+    {% endif %}
   </a>
   
   <div class="recipe-title-container">
