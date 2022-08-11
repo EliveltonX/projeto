@@ -10,7 +10,10 @@
     {% include 'recipes/partials/search.html' %}
 
     <main class="main-content-container">
+      {%include 'recipes/partials/pagination.html'%} <!-- Aqui-->
       {% block content %}{% endblock content %}
+      {%include 'recipes/partials/pagination.html'%} <!-- Inclui acima tbm-->
+    
     </main>
 
     {% include 'recipes/partials/footer.html' %}
