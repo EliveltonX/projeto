@@ -12,3 +12,13 @@ class RegisterForm(forms.ModelForm):
             'email',
             'password',
         ]
+        labels = {
+            'first_name': 'Primeiro Nome',
+            'last_name': 'Ultimo Nome',
+            'username': 'Usuário',
+            'email': 'E-mail',
+            'password': 'Senha',
+        }
+        help_texts = {
+            'email': 'Digite um email valido'
+        }
