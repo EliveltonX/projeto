@@ -1,8 +1,18 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
 class RegisterForm(forms.ModelForm):
+
+    password2 = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Repeate your password'
+        }),
+        label='Confirme Sua Senha',
+    )
+
     class Meta:
         model = User
         fields = [
@@ -12,13 +22,16 @@ class RegisterForm(forms.ModelForm):
             'email',
             'password',
         ]
-        labels = {
-            'first_name': 'Primeiro Nome',
-            'last_name': 'Ultimo Nome',
-            'username': 'Usuário',
-            'email': 'E-mail',
-            'password': 'Senha',
-        }
-        help_texts = {
-            'email': 'Digite um email valido'
-        }
+
+
+def clean_password(self):
+    data = self.cleaned_data.get('password')
+
+    if 'atenção' in data:
+        raise ValidationError(
+            'Não digite atenção no campo password',
+            code='invalid',
+            params={'value': 'atenção'}
+        )
+
+    return data
