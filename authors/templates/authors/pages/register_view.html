@@ -8,7 +8,7 @@
 </div>
 
     <div class="class main-content center container">
-        <form action="{% url 'authors:create' %}" method = POST>
+        <form action="{% url 'authors:create' %}" method = "POST">
             {% csrf_token %}
             <div class="class form-content-grid">
             {% for field in form %}
@@ -26,6 +26,19 @@
                 </div>
             {% endfor %}
             </div>
+            {% if form.errors %}
+            
+            <div class="class form-content form-content-grid">
+                <div class="class form-group">
+                    <div class="message message-error">
+                        Erros no formulario por favor corrija os erros
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+
+
             <div class="class form-group">
                 <button type="submit">Enviar</button>
             </div>
